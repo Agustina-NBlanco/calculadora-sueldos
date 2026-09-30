@@ -15,4 +15,5 @@ export const ENV = {
     DB_NAME: getEnv("DB_NAME"),
     FRONTEND_URL: getEnv("FRONTEND_URL"),
     NODE_ENV: getEnv("NODE_ENV"),
+    JWT_SECRET: getEnv("JWT_SECRET")
 }
