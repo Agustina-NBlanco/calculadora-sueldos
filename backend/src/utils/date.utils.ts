@@ -45,13 +45,3 @@ export const isValidMonth = (month: number): boolean => {
 export const isValidYear = (year: number): boolean => {
     return Number.isInteger(year) && year >= 2000
 }
-
-export const parseDateOnly = (date: string): Date => {
-    const [year, month, day] = date.split("-").map(Number) as [
-        number,
-        number,
-        number
-    ]
-
-    return new Date(year, month - 1, day)
-}

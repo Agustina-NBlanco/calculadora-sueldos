@@ -3,7 +3,7 @@ import { Calculation } from "../entities/Calculation";
 import { CalculationDay } from "../entities/CalculationDay";
 import { CalculationDiscount } from "../entities/CalculationDiscount";
 import { Template } from "../entities/Template";
-import { parseDateOnly } from "../utils/date.utils";
+import { AppError } from "../utils/AppError";
 import { CreateCalculationDto, UpdateCalculationDto } from "./calculations.dto";
 import { buildUpdatedCalculationDto } from "./utils/calculations.mappers";
 import { calculateTotals } from "./utils/calculations.utils";
@@ -25,7 +25,7 @@ export const createCalculation = async (userId: string, dto: CreateCalculationDt
             where: { id: dto.templateId, userId }
         })
 
-        if (!template) throw new Error("Template not found")
+        if (!template) throw new AppError("Plantilla no encontrada", 404)
     }
 
     const totals = calculateTotals(dto)
@@ -47,7 +47,7 @@ export const createCalculation = async (userId: string, dto: CreateCalculationDt
     const calculationDays = dto.days.map(day =>
         calculationDayRepository.create({
             calculationId: calculation.id,
-            date: parseDateOnly(day.date),
+            date: day.date,
             minutesWorked: day.minutesWorked,
             isHoliday: day.isHoliday
         })
@@ -89,7 +89,7 @@ export const getCalculationById = async (userId: string, id: string): Promise<Ca
     })
 
     if (!calculation) {
-        throw new Error("Calculation not found")
+        throw new AppError("Cálculo no encontrado", 404)
     }
 
     return calculation
@@ -111,7 +111,7 @@ export const updateCalculation = async (userId: string, id: string, dto: UpdateC
         })
 
         if (!template) {
-            throw new Error("Template not found")
+            throw new AppError("Plantilla no encontrada", 404)
         }
     }
 
@@ -137,7 +137,7 @@ export const updateCalculation = async (userId: string, id: string, dto: UpdateC
         const calculationDays = updatedDto.days.map(day =>
             calculationDayRepository.create({
                 calculationId: calculation.id,
-                date: parseDateOnly(day.date),
+                date: day.date,
                 minutesWorked: day.minutesWorked,
                 isHoliday: day.isHoliday
             })

@@ -1,5 +1,6 @@
 import { AppDataSource } from "../config/data-source";
 import { Template } from "../entities/Template";
+import { AppError } from "../utils/AppError";
 import { CreateTemplateDto, UpdateTemplateDto } from "./templates.dto";
 
 const templateRepository = AppDataSource.getRepository(Template)
@@ -23,7 +24,7 @@ export const getTemplateById = async (userId: string, id: string): Promise<Templ
     })
 
     if (!template) {
-        throw new Error('Template not found')
+        throw new AppError('Plantilla no encontrada', 404)
     }
 
     return template

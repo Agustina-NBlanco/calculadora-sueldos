@@ -1,8 +1,9 @@
 import "dotenv/config"
+import { AppError } from "../utils/AppError"
 
 function getEnv(name: string) {
     const value = process.env[name]
-    if (!value) throw new Error(`Missing environment variable: ${name}`)
+    if (!value) throw new AppError(`Faltar la variable de entorno: ${name}`, 500)
     return value
 }
 

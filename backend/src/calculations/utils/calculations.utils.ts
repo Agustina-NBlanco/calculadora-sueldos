@@ -1,5 +1,6 @@
 import { DiscountType } from "../../enums/discount-type.enum"
 import { HolidaySundayRule } from "../../enums/holiday-sunday-rule.enum"
+import { AppError } from "../../utils/AppError"
 import { isSunday } from "../../utils/date.utils"
 import { roundCents } from "../../utils/money.utils"
 import { CalculationDayDto, CalculationDiscountDto, CreateCalculationDto } from "../calculations.dto"
@@ -93,9 +94,7 @@ export const calculateTotals = (dto: CreateCalculationDto) => {
     const totalDiscountsCents = roundCents(totalDiscountsRaw)
 
     if (totalDiscountsCents > roundedGrossAmountCents) {
-        throw new Error(
-            "El total de descuentos no puede superar el monto bruto"
-        )
+        throw new AppError("El total de descuentos no puede superar el monto bruto", 400)
     }
 
     const finalAmountCents =

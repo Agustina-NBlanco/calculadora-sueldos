@@ -19,7 +19,7 @@ export const buildUpdatedCalculationDto = (calculation: Calculation, dto: Update
         days:
             dto.days ??
             calculation.days.map(day => ({
-                date: day.date.toISOString().slice(0, 10),
+                date: day.date,
                 minutesWorked: day.minutesWorked,
                 isHoliday: day.isHoliday
             })),

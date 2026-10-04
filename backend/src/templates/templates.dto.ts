@@ -1,4 +1,4 @@
-import { IsEnum, IsInt, IsNotEmpty, Min } from "class-validator";
+import { IsEnum, IsInt, IsNotEmpty, IsOptional, Min } from "class-validator";
 import { HolidaySundayRule } from "../enums/holiday-sunday-rule.enum";
 
 
@@ -24,21 +24,26 @@ export class CreateTemplateDto {
 }
 
 export class UpdateTemplateDto {
+    @IsOptional()
     @IsNotEmpty()
     name?: string
 
+    @IsOptional()
     @IsInt()
     @Min(0)
     normalRateCents?: number
 
+    @IsOptional()
     @IsInt()
     @Min(0)
     sundayRateCents?: number
 
+    @IsOptional()
     @IsInt()
     @Min(0)
     holidayRateCents?: number
 
+    @IsOptional()
     @IsEnum(HolidaySundayRule)
     holidaySundayRule?: HolidaySundayRule
 }
