@@ -11,11 +11,11 @@ const userRepository = AppDataSource.getRepository(User)
 export const register = async (data: RegisterDto) => {
     const { name, email, password, confirmPassword } = data
 
-    if (password !== confirmPassword) throw new AppError('Password do not match', 400)
+    if (password !== confirmPassword) throw new AppError('Las contrasenas no coinciden', 400)
 
     const existingUser = await userRepository.findOneBy({ email })
 
-    if (existingUser) throw new AppError('User already exists', 400)
+    if (existingUser) throw new AppError('El usuario ya existe', 400)
 
     const hashedPassword = await bcrypt.hash(password, 10)
 
@@ -28,7 +28,7 @@ export const register = async (data: RegisterDto) => {
 
     await userRepository.save(user)
 
-    return { message: 'Usuario creado correctamente' }
+    return { message: 'Usuario registrado correctamente' }
 }
 
 export const login = async (data: LoginDto) => {
@@ -37,13 +37,13 @@ export const login = async (data: LoginDto) => {
     const user = await userRepository.findOneBy({ email })
 
     if (!user) {
-        throw new AppError('Invalid credentials', 401)
+        throw new AppError('Credenciales inválidas', 401)
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
 
     if (!isMatch) {
-        throw new AppError('Invalid credentials', 401)
+        throw new AppError('Credenciales inválidas', 401)
     }
 
     const token = jwt.sign(

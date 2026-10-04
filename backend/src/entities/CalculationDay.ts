@@ -12,7 +12,7 @@ export class CalculationDay {
     calculationId!: string;
 
     @Column({ type: "date" })
-    date!: Date
+    date!: string;
 
     @Column()
     minutesWorked!: number;
