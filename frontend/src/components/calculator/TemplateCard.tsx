@@ -1,29 +1,18 @@
 import { FileText } from "lucide-react";
+import Card from "../ui/Card";
+import CardHeader from "../ui/CardHeader";
 
 export default function TemplateCard() {
     return (
-        <section className="rounded-2xl border border-white/10 bg-[#0d1422] p-5">
-            <div className="mb-5 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
-                    <FileText size={19} />
-                </div>
-
-                <div>
-                    <h2 className="text-sm font-semibold text-white">
-                        Plantilla
-                    </h2>
-
-                    <p className="mt-1 text-xs text-zinc-500">
-                        Usá una plantilla o configurá las tarifas manualmente.
-                    </p>
-                </div>
-            </div>
+        <Card>
+            <CardHeader
+                icon={<FileText size={19} />}
+                title="Plantilla"
+                description="Usá una plantilla o configurá las tarifas manualmente."
+            />
 
             <div>
-                <label
-                    htmlFor="template"
-                    className="sr-only"
-                >
+                <label htmlFor="template" className="sr-only">
                     Plantilla
                 </label>
 
@@ -46,6 +35,6 @@ export default function TemplateCard() {
                     manualmente para este cálculo.
                 </p>
             </div>
-        </section>
+        </Card>
     );
 }
