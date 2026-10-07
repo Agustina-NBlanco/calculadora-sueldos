@@ -1,28 +1,20 @@
 import { Clock3 } from "lucide-react";
+import Card from "@/components/ui/Card";
+import CardHeader from "@/components/ui/CardHeader";
+import Input from "@/components/ui/Input";
 
 export default function RatesCard() {
     return (
-        <section className="rounded-2xl border border-white/10 bg-[#0d1422] p-5">
-            <div className="mb-5 flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-500/10 text-violet-400">
-                    <Clock3 size={19} />
-                </div>
-
-                <div>
-                    <h2 className="text-sm font-semibold text-white">
-                        Tarifas por hora
-                    </h2>
-
-                    <p className="mt-1 text-xs text-zinc-500">
-                        Indicá cuánto te pagan por cada tipo de hora.
-                    </p>
-                </div>
-            </div>
+        <Card>
+            <CardHeader
+                icon={<Clock3 size={19} />}
+                title="Tarifas por hora"
+                description="Indicá cuánto te pagan por cada tipo de hora."
+            />
 
             <div className="space-y-4">
-
                 <div>
-                    <label className="mb-2 block text-xs font-medium text-zinc-400">
+                    <label htmlFor="normalRate" className="mb-2 block text-xs font-medium text-zinc-400">
                         Hora normal
                     </label>
 
@@ -31,18 +23,19 @@ export default function RatesCard() {
                             $
                         </span>
 
-                        <input
+                        <Input
+                            id="normalRate"
                             type="number"
                             min={0}
                             placeholder="0"
-                            className="w-full rounded-lg border border-white/10 bg-[#080d18] py-2.5 pl-8 pr-3 text-sm text-white outline-none transition focus:border-violet-500"
+                            className="w-full pl-8"
                         />
                     </div>
                 </div>
 
                 <div>
                     <div className="mb-2 flex items-center justify-between">
-                        <label className="text-xs font-medium text-zinc-400">
+                        <label htmlFor="sundayRate" className="text-xs font-medium text-zinc-400">
                             Hora domingo
                         </label>
 
@@ -56,18 +49,13 @@ export default function RatesCard() {
                             $
                         </span>
 
-                        <input
-                            type="number"
-                            min={0}
-                            placeholder="0"
-                            className="w-full rounded-lg border border-white/10 bg-[#080d18] py-2.5 pl-8 pr-3 text-sm text-white outline-none transition focus:border-violet-500"
-                        />
+                        <Input id="sundayRate" type="number" min={0} placeholder="0" className="w-full pl-8" />
                     </div>
                 </div>
 
                 <div>
                     <div className="mb-2 flex items-center justify-between">
-                        <label className="text-xs font-medium text-zinc-400">
+                        <label htmlFor="holidayRate" className="text-xs font-medium text-zinc-400">
                             Hora feriado
                         </label>
 
@@ -81,16 +69,10 @@ export default function RatesCard() {
                             $
                         </span>
 
-                        <input
-                            type="number"
-                            min={0}
-                            placeholder="0"
-                            className="w-full rounded-lg border border-white/10 bg-[#080d18] py-2.5 pl-8 pr-3 text-sm text-white outline-none transition focus:border-violet-500"
-                        />
+                        <Input id="holidayRate" type="number" min={0} placeholder="0" className="w-full pl-8" />
                     </div>
                 </div>
-
             </div>
-        </section>
+        </Card>
     );
 }

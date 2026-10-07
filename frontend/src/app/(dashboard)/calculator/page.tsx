@@ -1,4 +1,4 @@
-import CalculatorScreen from "@/features/calculator/components/CalculatorScreen";
+import CalculatorScreen from "@/components/calculator/CalculatorScreen";
 
 export default function CalculatorPage() {
     return <CalculatorScreen />;
